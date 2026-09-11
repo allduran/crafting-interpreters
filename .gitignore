@@ -1,0 +1,20 @@
+# Visual Studio & .NET
+.vs/
+bin/
+obj/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# C / C++ (para clox)
+*.o
+*.obj
+*.exe
+*.out
+*.a
+*.lib
+
+# OS Metadata
+.DS_Store
+Thumbs.db
