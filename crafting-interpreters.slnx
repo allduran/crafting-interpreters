@@ -8,6 +8,6 @@
     <File Path=".gitignore" />
     <File Path="README.md" />
   </Folder>
-  <Project Path="../clox_c/clox_c.vcxproj" />
-  <Project Path="jlox_csharp/jlox_csharp.csproj" />
+  <Project Path="clox_c/clox_c.vcxproj" Id="e5633e90-33f8-45c6-b6ea-e290cf51954c" />
+  <Project Path="jlox_csharp/jlox_csharp/jlox_csharp.csproj" />
 </Solution>
