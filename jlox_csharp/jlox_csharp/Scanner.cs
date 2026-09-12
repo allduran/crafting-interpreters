@@ -90,6 +90,10 @@ namespace JLox
                         // A comment goes until the end of the line.
                         while (Peek() != '\n' && !IsAtEnd()) Advance();
                     }
+                    else if (Match('*'))
+                    {
+                        BlockComment();
+                    }
                     else
                     {
                         AddToken(TokenType.SLASH);
@@ -197,5 +201,35 @@ namespace JLox
 
         private bool IsAlpha(char c) => (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || c == '_';
         private bool IsAlphaNumeric(char c) => IsAlpha(c) || IsDigit(c);
+
+        private void BlockComment()
+        {
+            int nesting = 1;
+
+            while (nesting > 0 && !IsAtEnd())
+            {
+                if (Peek() == '/' && PeekNext() == '*')
+                {
+                    // Detect nesting aperture
+                    Advance(); // Consum /
+                    Advance(); // Consum *
+                    nesting++;
+                }
+                else if (Peek() == '*' && PeekNext() == '/')
+                {
+                    // Detect closure */
+                    Advance(); // Consum *
+                    Advance(); // Consum /
+                    nesting--;
+                }
+                else
+                {
+                    if (Peek() == '\n') _line++;
+                    Advance();
+                }
+            }
+
+            if (nesting > 0) Lox.Error(_line, "Unterminated block comment.");
+        }
     }
 }
